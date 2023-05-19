@@ -1,0 +1,35 @@
+#!/bin/bash
+#installer Websocker tunneling 
+
+cd
+
+#Install Script Websocket-SSH Python
+wget -O ws-dropbear /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/nurulimuttcah/aio/permission/sshws/ws-dropbear
+wget -O ws-stunnel /usr/local/bin/ws-stunnel https://raw.githubusercontent.com/nurulimuttcah/aio/permission/sshws/ws-stunnel
+
+#izin permision
+chmod +x /usr/local/bin/ws-dropbear
+chmod +x /usr/local/bin/ws-stunnel
+
+#System Dropbear Websocket-SSH Python
+wget -O ws-dropbear.service /etc/systemd/system/ws-dropbear.service https://raw.githubusercontent.com/nurulimuttcah/aio/permission/sshws/ws-dropbear.service && chmod +x /etc/systemd/system/ws-dropbear.service
+
+#System SSL/TLS Websocket-SSH Python
+wget -O ws-stunnel.service /etc/systemd/system/ws-stunnel.service https://raw.githubusercontent.com/nurulimuttcah/aio/permission/sshws/ws-stunnel.service && chmod +x /etc/systemd/system/ws-stunnel.service
+
+#izin permision
+chmod +x /usr/local/bin/ws-dropbear.service
+chmod +x /usr/local/bin/ws-stunnel.service
+
+#restart service
+systemctl daemon-reload
+
+#Enable & Start & Restart ws-dropbear service
+systemctl enable ws-dropbear.service
+systemctl start ws-dropbear.service
+systemctl restart ws-dropbear.service
+
+#Enable & Start & Restart ws-openssh service
+systemctl enable ws-stunnel.service
+systemctl start ws-stunnel.service
+systemctl restart ws-stunnel.service
